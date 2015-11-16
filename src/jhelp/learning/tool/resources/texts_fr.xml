@@ -1,0 +1,197 @@
+<Texts>
+	<!-- Turtle name -->
+	<Text key="TurtleName">
+ 		vaisseau
+	</Text>
+
+	<!--
+		Forward instruction
+		0 : number of step OR "InformationStep"
+	-->
+ 	<Text key="InstructionForward">
+ 		Avance {0}
+	</Text>
+	<!--
+		Forward explanation
+		0 : Turtle name in "TurtleName"
+	-->
+ 	<Text key="ExplanationForward">
+ 		Fais avancer le "{0}" dans sa direction courante pour un nombre de pas donné
+	</Text>
+
+	<!--
+		Rotate instruction
+		0 : angle OR "InformationAngle"
+	-->
+ 	<Text key="InstructionRotate">
+ 		Tourne {0}
+	</Text>
+	<!--
+		Rotate explanation
+		0 : Turtle name in "TurtleName"
+	-->
+ 	<Text key="ExplanationRotate">
+ 		Tourne le "{0}" sur lui même pour un angle donné
+	</Text>
+
+	<!-- Put the pen up -->
+ 	<Text key="InstructionPenUp">
+ 		Crayon haut
+	</Text>
+	<!--
+		Pen up explanation
+		0 : Turtle name in "TurtleName"
+	-->
+ 	<Text key="ExplanationPenUp">
+ 		Met le crayon en haut, donc le {0} ne dessinera pas quand il bougera
+	</Text>
+
+
+	<!-- Put the pen down -->
+ 	<Text key="InstructionPenDown">
+ 		Crayon bas
+	</Text>
+	<!--
+		Pen down explanation
+		0 : Turtle name in "TurtleName"
+	-->
+ 	<Text key="ExplanationPenDown">
+ 		Met le crayon en bas, donc le {0} dessinera quand il bougera
+	</Text>
+
+	<!--
+		Change current color
+		0 : The color OR "InformationColor"
+	-->
+ 	<Text key="InstructionColor">
+ 		Couleur {0}
+	</Text>
+	<!--
+		Color explanation
+		0 : Turtle name in "TurtleName"
+	-->
+ 	<Text key="ExplanationColor">
+ 		Change la couleur utilisé par {0} pour dessiner
+	</Text>
+
+	<!-- Fill current area -->
+ 	<Text key="InstructionFill">
+ 		Remplit
+	</Text>
+	<!--
+		Fill explanation
+		0 : Turtle name in "TurtleName"
+	-->
+ 	<Text key="ExplanationFill">
+ 		Remplit la zone survolée par le {0} avec la couleur courante
+	</Text>
+
+	<!-- Goto to initial position -->
+ 	<Text key="InstructionHome">
+ 		Départ
+	</Text>
+	<!--
+		Home explanation
+		0 : Turtle name in "TurtleName"
+	-->
+ 	<Text key="ExplanationHome">
+ 		Le {0} retourne à sa position de départ, dirigé vers le haut
+	</Text>
+
+	<!-- Show turtle -->
+ 	<Text key="InstructionShow">
+ 		Montre
+	</Text>
+	<!--
+		Show explanation
+		0 : Turtle name in "TurtleName"
+	-->
+ 	<Text key="ExplanationShow">
+ 		Montre le {0}
+	</Text>
+
+	<!-- Hide turtle -->
+ 	<Text key="InstructionHide">
+ 		Cache
+	</Text>
+	<!--
+		Hide explanation
+		0 : Turtle name in "TurtleName"
+	-->
+ 	<Text key="ExplanationHide">
+ 		Cache le {0}
+	</Text>
+
+	<!-- Clear with current color -->
+ 	<Text key="InstructionClear">
+ 		Efface
+	</Text>
+	<!--
+		Clear explanation
+		0 : Turtle name in "TurtleName"
+	-->
+ 	<Text key="ExplanationClear">
+ 		Efface le papier avec la couleur courante
+	</Text>
+
+	<!-- Speed fast -->
+ 	<Text key="InstructionSpeedFast">
+ 		Vite
+	</Text>
+	<!--
+		Fast explanation
+		0 : Turtle name in "TurtleName"
+	-->
+ 	<Text key="ExplanationFast">
+ 		Le {0} va à vitesse super sonic, tout sera dessiné super vite
+	</Text>
+
+
+	<!-- Speed normal -->
+ 	<Text key="InstructionSpeedNormal">
+ 		Normale
+	</Text>
+	<!--
+		Normal explanation
+		0 : Turtle name in "TurtleName"
+	-->
+ 	<Text key="ExplanationNormal">
+ 		Le {0} va à vitesse normale, on à le temps de voir ce qui ce passe
+	</Text>
+
+	<!-- Speed slow -->
+ 	<Text key="InstructionSpeedSlow">
+ 		Lent
+	</Text>
+	<!--
+		Slow explanation
+		0 : Turtle name in "TurtleName"
+	-->
+ 	<Text key="ExplanationSlow">
+ 		Le {0} va à vitesse ralentit, on à le temps de comprendre ce qui ce passe
+	</Text>
+
+<!-- ************ -->
+
+	<!--	Original position	-->
+ 	<Text key="PositionOrigin">
+ 		Origine
+	</Text>
+	<!--	Face position	-->
+ 	<Text key="PositionFace">
+ 		Face
+	</Text>
+	<!--	Left position	-->
+ 	<Text key="PositionLeft">
+ 		Gauche
+	</Text>
+	<!--	Right position	-->
+ 	<Text key="PositionRight">
+ 		Droite
+	</Text>
+	<!--	Back position	-->
+ 	<Text key="PositionBack">
+ 		Dos
+	</Text>
+
+ </Texts>
