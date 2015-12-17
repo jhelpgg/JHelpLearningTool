@@ -8,31 +8,45 @@ package jhelp.learning.tool.language;
 public enum InstructionType
 {
    /** Clear paper with current color */
-   CLEAR,
+   CLEAR("clear.png"),
    /** Change pen color */
-   COLOR,
+   COLOR("color.png"),
    /** Speed fast */
-   FAST,
+   FAST("fast.png"),
    /** Fill over area with current color */
-   FILL,
+   FILL("fill.png"),
    /** Forward for given step */
-   FORWARD,
+   FORWARD("forward.png"),
    /** Hide spaceship */
-   HIDE,
+   HIDE("eye.png"),
    /** Go to start position */
-   HOME,
+   HOME("home.png"),
    /** Normal speed */
-   NORMAL,
+   NORMAL("normal.png"),
    /** Pen down for draw on moving */
-   PEN_DOWN,
+   PEN_DOWN("pen_down.png"),
    /** Pen up for not draw on moving */
-   PEN_UP,
+   PEN_UP("pen_up.png"),
    /** Rotate spaceship */
-   ROTATE,
+   ROTATE("rotate.png"),
    /** Show spaceship */
-   SHOW,
+   SHOW("eye.png"),
    /** Slow speed */
-   SLOW;
+   SLOW("slow.png");
+
+   /** Icon resource path */
+   private final String iconResourcePath;
+
+   /**
+    * Create a new instance of InstructionType
+    * 
+    * @param iconResourcePath
+    *           Icon resource path
+    */
+   InstructionType(final String iconResourcePath)
+   {
+      this.iconResourcePath = iconResourcePath;
+   }
 
    /**
     * Create an instruction instance for the type
@@ -72,5 +86,15 @@ public enum InstructionType
       }
 
       return null;
+   }
+
+   /**
+    * Icon resource path
+    * 
+    * @return Icon resource path
+    */
+   public String getIconResourcePath()
+   {
+      return this.iconResourcePath;
    }
 }

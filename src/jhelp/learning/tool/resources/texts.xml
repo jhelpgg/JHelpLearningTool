@@ -193,4 +193,135 @@
  		Back
 	</Text>
 
+<!-- ******************** -->
+<!-- ***   Tutorial   *** -->
+<!-- ******************** -->
+
+	<!-- Tutorial step 1 -->
+ 	<Text key="TutorialStep1">
+ 		Hello and welcome to this learning tool.
+ 		The aim of this tool is to learn you some basics of code.
+ 		First we presents this interface and then give you some exercise.
+ 		Just remember that learn is understand by yourself,
+ 		and the better way for that is to try things by yourself.
+ 		This tool will draw things.
+ 		On the left, you see load, save and new buttons.
+ 		Under them, you see some buttons to change the point of view.
+ 		You can try them at any time.
+ 		In middle you see a white paper with a spaceship over it.
+ 		The code you will enter, will pilot the spaceship.
+ 		With this spaceship, you can draw things on paper.
+ 		Note : mouse wheel change the zoom on scene.
+ 		On the right its the code zone.
+ 		--Click to see next page--
+	</Text>
+
+	<!-- Tutorial step 2 -->
+ 	<Text key="TutorialStep2">
+ 		The code zone presents the set of instructions that spaceship understand.
+ 		A GO button, that order spaceship to follow instructions.
+ 		A white area, in it will find the list of spaceship instructions.
+ 		Instructions are execute in order, from top to bottom.
+ 		To add an instruction in the list, click on one available.
+ 		First exercise, click on #FORWARD# forward button, type 100 in edit text.
+ 		You will see the #FORWARD# forward action on the instruction list.
+ 		Then press GO button to give the order to spaceship.
+ 		See what append.
+ 		--To continue tutorial, click on continue button--
+	</Text>
+
+	<!-- Tutorial step 3 -->
+ 	<Text key="TutorialStep3">
+ 		What did you see ?
+ 		The spaceship went forward its current direction for 100 pixels.
+ 		In doing that it makes a draw, so its draw a line.
+ 		Its possible to not draw on putting pen up.
+ 		Now click on #ROTATE# rotate button, then type 45 in edit text.
+ 		Add click on #FORWARD# forward button, type 100 in edit text (Yes a second time).
+ 		Then press GO button to give the order to spaceship.
+ 		See what append.
+ 		--To continue tutorial, click on continue button--
+	</Text>
+
+	<!-- Tutorial step 4 -->
+ 	<Text key="TutorialStep4">
+ 		Now the spaceship go 100 step forward,
+ 		then rotate 45 degree (counter clockwise),
+ 		then forward 100 steps again.
+ 		Now right click on the #ROTATE# 45 inside instruction list.
+ 		It becomes red, that's mean you can manipulate it.
+ 		Press C, you will see a second a second one, you just do a copy.
+ 		Now press down button until the #ROTATE# 45 is the last one.
+ 		Do also a copy of a #FORWARD# 100 and put it at end.
+ 		You  should have, form top to bottom :
+ 		#FORWARD# 100, #ROTATE# 45, #FORWARD# 100, #ROTATE# 45, #FORWARD# 100
+ 		Then press GO button to give the order to spaceship.
+ 		See what append.
+ 		--To continue tutorial, click on continue button--
+	</Text>
+
+	<!-- Tutorial step 5 -->
+ 	<Text key="TutorialStep5">
+ 		Now talk about speed.
+ 		If you feel at ease and thinks spaceship goes to slow you can add #FAST# at first instruction.
+ 		If you want be sure to see all space ship movement add #SLOW# at first instruction.
+ 		For delete an instruction, select it by right click then press delete or suppr button.
+ 		Do your own test and see the difference.
+ 		--To continue tutorial, click on continue button--
+	</Text>
+
+	<!-- Tutorial step 6 -->
+ 	<Text key="TutorialStep6">
+ 		Add a #HOME# instruction at end,
+ 		Then a #PEN_UP# pen up, #ROTATE# 22, #FORWARD# 50.
+ 		Change pen color with #COLOR#, choose the color you want.
+ 		And add #FILL#.
+ 		Instructions you have now looks like, form top to bottom :
+ 		#SLOW#, #FORWARD# 100, #ROTATE# 45, #FORWARD# 100, #ROTATE# 45, #FORWARD# 100,
+ 		#HOME#, #PEN_UP#, #ROTATE# 22, #FORWARD# 50, #COLOR#, #FILL#
+ 		Then press GO button to give the order to spaceship.
+ 		See what append.
+ 		--To continue tutorial, click on continue button--
+	</Text>
+
+	<!-- Tutorial step 7 -->
+ 	<Text key="TutorialStep7">
+ 		Now a tip, imagine you are not satisfied about #FORWARD# or #ROTATE# value,
+ 		or the color in #COLOR# not fit, you can go on edit mode and press space.
+ 		For next exercise, change the color of #COLOR# without delete it and add a new one.
+ 		Remember to go in edit mode, just right click on element to edit
+ 		--To continue tutorial, click on continue button--
+ 	</Text>
+
+	<!-- Tutorial step 8 -->
+ 	<Text key="TutorialStep8">
+ 		Before do this exercise, save your work to be able to comes back on it.
+ 		Add lot of time same instruction (by example #NORMAL#) until you see only them.
+ 		Your work is still their (You can press GO button for have a proof).
+ 		For scroll, put your mouse over instruction list, press left button and go down or up.
+ 		When you understood the scrolling, you can get back to your work on loading it.
+ 		--To continue tutorial, click on continue button--
+ 	</Text>
+
+	<!-- Tutorial step 9 -->
+ 	<Text key="TutorialStep9">
+ 		Now clear all your work to do something different (White button right save button).
+ 		Use what you learn to :
+ 		Draw a square of 100 steps on each side.
+ 		Fill it in red.
+		You can found a solution on opening the "9" file.
+		But I recommend to try first before look solution.
+		--To continue tutorial, click on continue button--
+ 	</Text>
+
+	<!-- Tutorial step 10 -->
+ 	<Text key="TutorialStep10">
+ 		Congratulation you reach the end of this tutorial.
+ 		You will find some samples (in open) that show you what can be done with little patience and geometry.
+ 		Have fun on driving the space ship and try things not explain here.
+ 		For going further, I work on an other tool, with "loops" and "functions" for doing more complex things.
+ 		Regards :
+ 		JHelp
+ 	</Text>
+
  </Texts>

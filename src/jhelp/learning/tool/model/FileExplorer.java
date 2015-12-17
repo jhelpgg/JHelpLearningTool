@@ -2,6 +2,7 @@ package jhelp.learning.tool.model;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,11 +11,19 @@ import javax.swing.JOptionPane;
 import jhelp.engine.Texture;
 import jhelp.engine.event.Object2DListener;
 import jhelp.engine.twoD.Object2D;
+import jhelp.learning.tool.resources.LearningResources;
+import jhelp.util.debug.Debug;
 import jhelp.util.gui.JHelpImage;
 import jhelp.util.gui.JHelpTextAlign;
 import jhelp.util.gui.alphabet.AlphabetGreen8x16;
 import jhelp.util.io.UtilIO;
+import jhelp.util.resources.ResourceDirectory;
+import jhelp.util.resources.ResourceElement;
+import jhelp.util.resources.ResourceFile;
+import jhelp.util.resources.ResourcesSystem;
 import jhelp.util.text.UtilText;
+import jhelp.util.thread.ThreadManager;
+import jhelp.util.thread.ThreadedVerySimpleTask;
 
 /**
  * File explorer
@@ -126,18 +135,82 @@ public class FileExplorer
       }
    }
 
-   /** Directory where search learning files */
-   private static final File            DIRECTORY   = UtilIO.obtainExternalFile("Learn/programs");
+   /**
+    * Task for copy samples to user directory (For make them available for him)
+    * 
+    * @author JHelp
+    */
+   static class TaskObtainTutorialExamples
+         extends ThreadedVerySimpleTask
+   {
+      /**
+       * Create a new instance of TaskObtainTutorialExamples
+       */
+      TaskObtainTutorialExamples()
+      {
+      }
+
+      /**
+       * Copy samples to user directory (For make them available for him) <br>
+       * <br>
+       * <b>Parent documentation:</b><br>
+       * {@inheritDoc}
+       * 
+       * @see jhelp.util.thread.ThreadedVerySimpleTask#doVerySimpleAction()
+       */
+      @Override
+      protected void doVerySimpleAction()
+      {
+         try
+         {
+            final ResourcesSystem resourcesSystem = LearningResources.RESOURCES.obtainResourcesSystem();
+            final ResourceDirectory resourceDirectory = new ResourceDirectory("tutorial");
+            ResourceFile resourceFile;
+            File file;
+            InputStream inputStream;
+
+            for(final ResourceElement resourceElement : resourcesSystem.obtainList(resourceDirectory))
+            {
+               resourceFile = (ResourceFile) resourceElement;
+               file = new File(FileExplorer.DIRECTORY, resourceFile.getName());
+
+               if(file.exists() == false)
+               {
+                  inputStream = resourcesSystem.obtainInputStream(resourceFile);
+                  UtilIO.write(inputStream, file);
+                  inputStream.close();
+               }
+            }
+         }
+         catch(final Exception exception)
+         {
+            Debug.printException(exception, "Failed to copy tutorial examples");
+         }
+      }
+   }
+
    /** Learn file extension */
    private static final String          EXTENTION   = ".learn";
    /** Learning file filter */
    private static final LearnFileFilter FILE_FILTER = new LearnFileFilter();
+   /** Directory where search learning files */
+   static final File                    DIRECTORY   = UtilIO.obtainExternalFile("Learn/programs");
+
+   /**
+    * Launch the copy samples to user directory (For make them available for him)
+    */
+   public static void loadTutorialExamples()
+   {
+      ThreadManager.THREAD_MANAGER.doThread(new TaskObtainTutorialExamples(), null);
+   }
+
    /** Files areas */
-   private final List<FileArea>         fileAreas;
+   private final List<FileArea> fileAreas;
    /** Listener of file explorer events */
-   private FileExplorerListener         fileExplorerListener;
+   private FileExplorerListener fileExplorerListener;
+
    /** Texture where draw the file explorer */
-   private final Texture                texture;
+   private final Texture        texture;
 
    /**
     * Create a new instance of FileExplorer
@@ -374,4 +447,5 @@ public class FileExplorer
       fileExplorerListener.saveFile(file);
       this.setVisible(false);
    }
+
 }

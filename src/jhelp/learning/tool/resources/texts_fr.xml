@@ -194,4 +194,142 @@
  		Dos
 	</Text>
 
+<!-- ******************** -->
+<!-- ***   Tutorial   *** -->
+<!-- ******************** -->
+
+	<!-- Tutorial step 1 -->
+ 	<Text key="TutorialStep1">
+ 		Bonjour et bienvenu dans cet outil d'apprentissage.
+ 		Le but de ce programme est de vous apprendre des bases de programation.
+ 		Tout d'abord vous sera présentez l'interface, puis quelques exercisses.
+ 		Rapellez vous qu'apprendre c'est comprendre par vous même
+ 		et que le meilleur moyen c'est de faire des essais et d'en voir les résultats.
+ 		Ce programme dessine des formes à l'écran.
+ 		A gauche vous voyez les bouttons, d'ouverture, sauvegarde et de nouveau projet.
+ 		Dessous ceux-ci se trouvre des bouttons pour changer de point de vue.
+ 		Vous pouvez les utilisez à tout moments.
+ 		Ils sont pratique pour voir ce qui se passe,
+ 		surtout combiné avec la molette de la souris pour zoomer.
+ 		Au milieu se trouve un papier blanc et un vaisseau audessus du papier.
+ 		Le code que vous produirez pilotera le vaisseau.
+ 		Le vaisseau peut dessiner sur le papier si son crayon le touche.
+ 		A droite se trouve la zome du code.
+ 		--Clicker pour voir la page suivante--
+	</Text>
+
+	<!-- Tutorial step 2 -->
+ 	<Text key="TutorialStep2">
+ 		Dans la zone à droite vous voyez la	liste des instructions que le vaisseau puet executer.
+ 		Le bouton GO dit au vaisseau d'executer les instructions.
+ 		La zone, pour le moment blanche, sous le boutton GO, est la liste des instructions que suivra le vaisseau.
+ 		Les instructions sont exécutées dans l'ordre : du haut vers le bas.
+ 		Pour ajouter une instruction à la liste il suffit de choisr une des possibles en cliquant dessus.
+ 		Premier exercisse : appuyez sur le button #FORWARD# avance et tappez 100 dans la zone de saisie.
+ 		Vous verrez alors l'action "#FORWARD# avance 100" dans la liste des instructions à éxécuter.
+ 		Appuyez sur le bouton GO pour que le vaisseau éxécute la manoeuvre.
+ 		Regardez ce qui ce passe.
+ 		--Pour continuer le tutorial, appuyez sur le bouton "Continue" --
+	</Text>
+
+	<!-- Tutorial step 3 -->
+ 	<Text key="TutorialStep3">
+ 		Qu'avez vous vu ?
+ 		Le vaisseau a avancé de 100 pas dans sa direction courante.
+ 		Le vaisseau en se déplaçant à tracer un trait.
+ 		Il faut savoir qu'il est possible de mettre le crayon en haut pour ne pas dessiner.
+ 		Maintenant cliquez sur #ROTATE# toune et tapez 45 dans la zone de saisie.
+		Ajoutez un #FORWARD# avance de 100 (Oui un second)
+ 		Appuyez sur le bouton GO pour que le vaisseau éxécute la manoeuvre.
+ 		Regardez ce qui ce passe.
+ 		--Pour continuer le tutorial, appuyez sur le bouton "Continue" --
+	</Text>
+
+	<!-- Tutorial step 4 -->
+ 	<Text key="TutorialStep4">
+ 		Le vaisseau a avancé de 100 pas dans sa direction courante.
+ 		Le vaisseau a touné de 45 dégré sur lui même dans le sens contraire des aiguilles d'une montre.
+ 		Le vaisseau a avancé de 100 pas dans sa direction courante à nouveau.
+ 		Maintnenant cliquez droit sur #ROTATE# 45 dans la liste des instructions
+ 		L'instruction devient rouge, car il devient alors modifiable
+ 		Appuyer sur la touche C de votre clavier. Une copie apparait alors.
+ 		Maintenant avec la fléche bas faites decendre l'instruction tout en bas.
+ 		Faites la même chose avec une des instructions #FORWARD# 100.
+ 		Voud devriez obtenir de haut en bas :
+ 		#FORWARD# 100, #ROTATE# 45, #FORWARD# 100, #ROTATE# 45, #FORWARD# 100
+ 		Appuyez sur le bouton GO pour que le vaisseau éxécute la manoeuvre.
+ 		Regardez ce qui ce passe.
+ 		--Pour continuer le tutorial, appuyez sur le bouton "Continue" --
+	</Text>
+
+	<!-- Tutorial step 5 -->
+ 	<Text key="TutorialStep5">
+ 		Parlons un peu de vitesse d'excution.
+ 		Si vous vous sentez suffisament à l'aise,
+ 		vous pouvez accelerez les mouvements du vaisseau en mettant un #FAST# tout au début.
+ 		Si au contraire vous voulez avoir bien le temps de voir ce qui se passe ajoutez un #SLOW#.
+ 		Faites des essais et regardez la différence.
+ 		Astuce : Pour effacer une instruction, cliquez droit sur celle ci pour passer en mode modification,
+ 		et appuyez sur la touche "Retource arrirére", "Suppr." ou "delete"
+ 		--Pour continuer le tutorial, appuyez sur le bouton "Continue" --
+	</Text>
+
+	<!-- Tutorial step 6 -->
+ 	<Text key="TutorialStep6">
+ 		Ajouter #HOME# Départ, #PEN_UP# Crayon haut, #ROTATE# Tourne 22, #FORWARD# Avance 50,
+ 		#COLOR# choissez une couleur (Evitez blanc pour voir quelque chose), #FILL# Remplit
+ 		A la fin dans cet ordre.
+ 		Maintenant votre liste d'instruction devrait ressembler à (de haut en bas) :
+ 		#SLOW#, #FORWARD# 100, #ROTATE# 45, #FORWARD# 100, #ROTATE# 45, #FORWARD# 100,
+ 		#HOME#, #PEN_UP#, #ROTATE# 22, #FORWARD# 50, #COLOR#, #FILL#
+ 		Appuyez sur le bouton GO pour que le vaisseau éxécute la manoeuvre.
+ 		Regardez ce qui ce passe.
+ 		--Pour continuer le tutorial, appuyez sur le bouton "Continue" --
+	</Text>
+
+	<!-- Tutorial step 7 -->
+ 	<Text key="TutorialStep7">
+ 		Astuce : Pour changer la valeure d'un #FORWARD# ou d'un #ROTATE# ou la couleur de #COLOR#
+ 		Passer en mode edition (Avec click droit) sur l'élément a changer et appuyez sur la touche espace.
+ 		Cela vous évitera de suprimer, ajouter un autre, puis le placer.
+ 		Exercisse : En utilisant cette astuce changez la couleur de #COLOR#
+ 		--Pour continuer le tutorial, appuyez sur le bouton "Continue" --
+ 	</Text>
+
+	<!-- Tutorial step 8 -->
+ 	<Text key="TutorialStep8">
+ 		Avant de commencer cet excercisse, si vous voulez conserver ce qui à été fait, sauvegardez le.
+ 		Ajoutez plusieurs fois la même instruction (Par exemple #NORMAL#)
+ 		de façon à ne plus voir que ça dans la liste des instructions.
+ 		Vos instructions ne sont pas perdu, si vous en voulez la preuve, appuyez sur le bouton GO.
+ 		Positioner votre souris sur la liste des instructions,
+ 		appuyer le bouton gauche de la souris a maintenez le enfoncé.
+ 		Bouger votre main vers le haut et/ou le bas (tout en gardant le bouton gauche enfoncé).
+ 		Familierisez vous avec le scroll, il vous sera utile si vous faites des programmes long.
+ 		--Pour continuer le tutorial, appuyez sur le bouton "Continue" --
+ 	</Text>
+
+	<!-- Tutorial step 9 -->
+ 	<Text key="TutorialStep9">
+ 		Avant de commencer cet excercisse, si vous voulez conserver ce qui à été fait, sauvegardez le.
+ 		Mzintenant effaçons la liste d'instruction avec le bouton blanc à droite du bouton sauvegader.
+ 		Utiliser ce que vous avez appris pour :
+ 		Dessiner un carré de taille 100 pas de chaque coté remplit de rouge.
+ 		Il est recommendé de faire des essais avant de regardr une soultion.
+ 		Pour voir une des solutions possible ouvrir le fichier "9"
+ 		--Pour continuer le tutorial, appuyez sur le bouton "Continue" --
+ 	</Text>
+
+	<!-- Tutorial step 10 -->
+ 	<Text key="TutorialStep10">
+ 		Bravo vous avez atteint la fin de ce tutorial.
+ 		Vous touverez quelques exemples dans la liste des fichiers présents.
+ 		Ils vous montrent ce qu'on peut obtenir avec un peu de patience et de géométrie.
+ 		Amussez vous bien en pilotant le vaisseau et en essaynt des choses non expliquer ici.
+ 		Pour aller plus loin je publierais un autre outil permettant plus,
+ 		car il vous parlera des "boucles" et des "fonctions", ce que cet outil ne peut pas faire.
+ 		Cordialement :
+ 		JHelp
+ 	</Text>
+
  </Texts>

@@ -20,12 +20,9 @@ import jhelp.engine.JHelpSceneRenderer;
 import jhelp.engine.Texture;
 import jhelp.engine.event.Button2DListener;
 import jhelp.engine.event.Object2DListener;
-import jhelp.engine.event.OptionPane2DListener;
 import jhelp.engine.twoD.Button2D;
 import jhelp.engine.twoD.GUI2D;
 import jhelp.engine.twoD.Object2D;
-import jhelp.engine.twoD.OptionPane2D;
-import jhelp.engine.twoD.OptionPaneButtons;
 import jhelp.learning.tool.language.Instruction;
 import jhelp.learning.tool.language.InstructionClear;
 import jhelp.learning.tool.language.InstructionColor;
@@ -63,20 +60,32 @@ import jhelp.util.preference.Preferences;
  * @author JHelp
  */
 public class InstructionExecuter
-      implements LanguageSpy, Object2DListener, ColorChooserListener, Button2DListener, OptionPane2DListener, FileExplorerListener, KeyListener
+      implements LanguageSpy, Object2DListener, ColorChooserListener, Button2DListener, FileExplorerListener, KeyListener, TutorialMessageListener
 {
+   /** Continue tutorial button ID */
+   private static final int         BUTTON_ID_CONTINUE_TUTORIAL = 4;
    /** Load file button ID */
-   private static final int         BUTTON_ID_LOAD = 0;
+   private static final int         BUTTON_ID_LOAD              = 0;
    /** New file button ID */
-   private static final int         BUTTON_ID_NEW  = 1;
+   private static final int         BUTTON_ID_NEW               = 1;
+   /** Restart tutorial button ID */
+   private static final int         BUTTON_ID_RESTART_TUTORIAL  = 3;
    /** Save file button ID */
-   private static final int         BUTTON_ID_SAVE = 2;
+   private static final int         BUTTON_ID_SAVE              = 2;
    /** GO button text and ID */
-   private static final String      GO             = "GO";
+   private static final String      GO                          = "GO";
    /** Last open file preference key */
-   private static final String      LAST_OPEN_FILE = "LastOpenFile";
+   private static final String      LAST_OPEN_FILE              = "LastOpenFile";
    /** Instructions receiver texture name and object ID */
-   private static final String      RECEIVER       = "RECEIVER";
+   private static final String      RECEIVER                    = "RECEIVER";
+   /** Number of tutorials (+1) */
+   private static final int         TOTAL_TUTORIAL_STEPS        = 11;
+   /** Preference for save current tutorial step */
+   private static final String      TUTORIAL_STEP               = "TutorialStep";
+   /** Button for continue tutorial */
+   private final Button2D           buttonContinueTutorial;
+   /** Button for restart tutorial */
+   private final Button2D           buttonRestartTutorial;
    /** Color chooser */
    private final ColorChooser       colorChooser;
    /** Cursor changer */
@@ -104,8 +113,6 @@ public class InstructionExecuter
    private int                      mouseListY;
    /** Number of visible instruction in list */
    private final int                numberVisible;
-   /** Option pane 2D for show message */
-   private final OptionPane2D       optionPane2D;
    /** Paper sheet where draw is paint and spaceship turtle fly over */
    private final PaperSheet         paperSheet;
    /** User preferences */
@@ -116,6 +123,10 @@ public class InstructionExecuter
    private int                      scroll;
    /** Texture for show instruction list */
    private final Texture            textureInstructions;
+   /** Object for show tutorial */
+   private final TutorialMessage    tutorialMessage;
+   /** Current tutorial step */
+   private int                      tutorialStep;
 
    /**
     * Create a new instance of InstructionExecuter
@@ -200,6 +211,17 @@ public class InstructionExecuter
       this.addPosition(LearningResources.PositionBack, yy + 240);
       this.addPosition(LearningResources.PositionRight, yy + 320);
 
+      this.buttonRestartTutorial = new Button2D(InstructionExecuter.BUTTON_ID_RESTART_TUTORIAL, 8, yy + 420, 64, 64,//
+            LearningResources.RESOURCES.obtainJHelpImage("restart.png"));
+      this.buttonRestartTutorial.registerButton2DListener(this);
+      this.gui2d.addOver3D(this.buttonRestartTutorial);
+
+      this.buttonContinueTutorial = new Button2D(InstructionExecuter.BUTTON_ID_CONTINUE_TUTORIAL, 80, yy + 420, 100, 50,//
+            LearningResources.RESOURCES.obtainJHelpImage("continue_normal.png"),//
+            LearningResources.RESOURCES.obtainJHelpImage("continue_clicked.png"));
+      this.buttonContinueTutorial.registerButton2DListener(this);
+      this.gui2d.addOver3D(this.buttonContinueTutorial);
+
       this.colorChooser = new ColorChooser(((x + width) - ColorChooser.WIDTH) >> 1, (height - ColorChooser.HEIGHT) >> 1, this);
       this.gui2d.addOver3D(this.colorChooser);
       this.colorChooser.setVisible(false);
@@ -215,7 +237,7 @@ public class InstructionExecuter
       final int h = height >> 1;
       this.fileExplorer = new FileExplorer((wi - w) >> 1, (height - h) >> 1, w, h);
       this.gui2d.addOver3D(this.fileExplorer);
-      this.optionPane2D = new OptionPane2D(sceneRenderer, (wi - w) >> 1, (height - h) >> 1, w, h, this);
+      this.tutorialMessage = new TutorialMessage(sceneRenderer, x + width, height, this);
 
       this.scroll(0);
       final File file = this.preferences.getFileValue(InstructionExecuter.LAST_OPEN_FILE);
@@ -224,6 +246,10 @@ public class InstructionExecuter
       {
          this.openFile(file);
       }
+
+      this.tutorialStep = this.preferences.getValue(InstructionExecuter.TUTORIAL_STEP, 1);
+      this.updateTutorialButtons();
+      this.showTutorial();
    }
 
    /**
@@ -499,6 +525,19 @@ public class InstructionExecuter
    }
 
    /**
+    * Show current tutorial message
+    */
+   private void showTutorial()
+   {
+      if(this.tutorialStep >= InstructionExecuter.TOTAL_TUTORIAL_STEPS)
+      {
+         return;
+      }
+
+      this.tutorialMessage.showMessage("TutorialStep" + this.tutorialStep, this.tutorialStep);
+   }
+
+   /**
     * Update the instruction list image
     */
    private void updateList()
@@ -514,6 +553,15 @@ public class InstructionExecuter
 
       this.imageInstructions.endDrawMode();
       this.textureInstructions.setImage(this.imageInstructions);
+   }
+
+   /**
+    * Update tutorial buttons visibilities
+    */
+   private void updateTutorialButtons()
+   {
+      this.buttonRestartTutorial.setVisible(this.tutorialStep > 1);
+      this.buttonContinueTutorial.setVisible(this.tutorialStep < InstructionExecuter.TOTAL_TUTORIAL_STEPS);
    }
 
    /**
@@ -547,6 +595,17 @@ public class InstructionExecuter
          case BUTTON_ID_NEW:
             this.instructions.clear();
             this.updateList();
+            this.finishEdit();
+            this.language.raz();
+            this.preferences.setValue(InstructionExecuter.LAST_OPEN_FILE, new File(""));
+         break;
+         case BUTTON_ID_RESTART_TUTORIAL:
+            this.tutorialStep = 1;
+            this.updateTutorialButtons();
+            this.showTutorial();
+         break;
+         case BUTTON_ID_CONTINUE_TUTORIAL:
+            this.showTutorial();
          break;
       }
    }
@@ -988,6 +1047,11 @@ public class InstructionExecuter
 
       try
       {
+         if((file == null) || (file.exists() == false) || (file.isDirectory() == true))
+         {
+            return;
+         }
+
          bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
          final StringBuilder stringBuilder = new StringBuilder();
          String line = bufferedReader.readLine();
@@ -1029,26 +1093,6 @@ public class InstructionExecuter
             }
          }
       }
-   }
-
-   /**
-    * Called when option pane button clicked <br>
-    * <br>
-    * <b>Parent documentation:</b><br>
-    * {@inheritDoc}
-    * 
-    * @param optionPaneID
-    *           Option pane ID
-    * @param button
-    *           Clicked button
-    * @see jhelp.engine.event.OptionPane2DListener#optionPaneClicked(int, jhelp.engine.twoD.OptionPaneButtons)
-    */
-   @Override
-   public void optionPaneClicked(final int optionPaneID, final OptionPaneButtons button)
-   {
-      // {@todo} TODO Implements optionPaneClicked
-      Debug.printTodo("Implements optionPaneClicked");
-
    }
 
    /**
@@ -1138,5 +1182,31 @@ public class InstructionExecuter
    public void setCursorManipulator(final CursorManipulator cursorManipulator)
    {
       this.cursorManipulator = cursorManipulator;
+   }
+
+   /**
+    * Called when tutorial message clicked <br>
+    * <br>
+    * <b>Parent documentation:</b><br>
+    * {@inheritDoc}
+    * 
+    * @param tutorialID
+    *           Tutorial ID
+    * @see jhelp.learning.tool.model.TutorialMessageListener#tutorialClicked(int)
+    */
+   @Override
+   public void tutorialClicked(final int tutorialID)
+   {
+      this.tutorialStep = tutorialID + 1;
+      this.updateTutorialButtons();
+
+      switch(this.tutorialStep)
+      {
+         case 2:
+            this.showTutorial();
+         break;
+      }
+
+      this.preferences.setValue(InstructionExecuter.TUTORIAL_STEP, this.tutorialStep);
    }
 }
