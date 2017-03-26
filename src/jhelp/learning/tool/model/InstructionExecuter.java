@@ -55,7 +55,7 @@ import jhelp.logo.language.LanguageSpy;
 import jhelp.util.debug.Debug;
 import jhelp.util.gui.JHelpImage;
 import jhelp.util.gui.JHelpTextAlign;
-import jhelp.util.gui.alphabet.AlphabetGraphitti;
+import jhelp.util.gui.alphabet.AlphabetGraffiti;
 import jhelp.util.gui.alphabet.AlphabetOrange16x16;
 import jhelp.util.io.UtilIO;
 import jhelp.util.io.json.ArrayJSON;
@@ -178,7 +178,7 @@ public class InstructionExecuter
       final JHelpImage image = new JHelpImage(256, 64);
       image.startDrawMode();
       image.fillRoundRectangle(64, 2, 128, 60, 32, 32, 0xFF668844, false);
-      AlphabetGraphitti.NORMAL.drawOn(InstructionExecuter.GO, JHelpTextAlign.CENTER, image, 128, 32, true);
+      AlphabetGraffiti.NORMAL.drawOn(InstructionExecuter.GO, JHelpTextAlign.CENTER, image, 128, 32, true);
       image.endDrawMode();
       texture.setImage(image);
       goButton.setTexture(texture);
@@ -283,7 +283,7 @@ public class InstructionExecuter
     */
    private void addInstruction(final Instruction instruction, final int index)
    {
-      if(this.executing == true)
+      if(this.executing)
       {
          return;
       }
@@ -319,7 +319,7 @@ public class InstructionExecuter
                   instructionToAdd = new InstructionForward();
                   ((InstructionForward) instructionToAdd).setStep(step);
                }
-               catch(final Exception exception)
+               catch(final Exception ignored)
                {
                }
             }
@@ -352,7 +352,7 @@ public class InstructionExecuter
                   instructionToAdd = new InstructionRotate();
                   ((InstructionRotate) instructionToAdd).setAngle(angle);
                }
-               catch(final Exception exception)
+               catch(final Exception ignored)
                {
                }
             }
@@ -388,6 +388,7 @@ public class InstructionExecuter
    private void addInstructionChoice(final int x, final int y, final InstructionType instructionType)
    {
       final Instruction instruction = instructionType.createInstructionInstance();
+      assert instruction != null;
       final Object2D object2d = instruction.obtainObject2D();
       object2d.setCanBeDetected(true);
       object2d.addObject2DListener(this);
@@ -428,37 +429,37 @@ public class InstructionExecuter
     */
    private void applyOrder(final String ordrer)
    {
-      if(LearningResources.PositionOrigin.equals(ordrer) == true)
+      if(LearningResources.PositionOrigin.equals(ordrer))
       {
          this.paperSheet.originalPosition();
          return;
       }
 
-      if(LearningResources.PositionBack.equals(ordrer) == true)
+      if(LearningResources.PositionBack.equals(ordrer))
       {
          this.paperSheet.backView();
          return;
       }
 
-      if(LearningResources.PositionFace.equals(ordrer) == true)
+      if(LearningResources.PositionFace.equals(ordrer))
       {
          this.paperSheet.frontView();
          return;
       }
 
-      if(LearningResources.PositionLeft.equals(ordrer) == true)
+      if(LearningResources.PositionLeft.equals(ordrer))
       {
          this.paperSheet.leftView();
          return;
       }
 
-      if(LearningResources.PositionRight.equals(ordrer) == true)
+      if(LearningResources.PositionRight.equals(ordrer))
       {
          this.paperSheet.rightView();
          return;
       }
 
-      if((InstructionExecuter.GO.equals(ordrer) == true) && (this.executing == false))
+      if((InstructionExecuter.GO.equals(ordrer)) && (!this.executing))
       {
          this.executing = true;
          this.finishEdit();
@@ -480,7 +481,6 @@ public class InstructionExecuter
          }
 
          this.language.appendBlocks(lines);
-         return;
       }
    }
 
@@ -589,7 +589,7 @@ public class InstructionExecuter
    @Override
    public void button2DClicked(final Button2D button2d, final int buttonID)
    {
-      if(this.executing == true)
+      if(this.executing)
       {
          return;
       }
@@ -741,7 +741,7 @@ public class InstructionExecuter
    @Override
    public void keyPressed(final KeyEvent keyEvent)
    {
-      if((this.colorChooser.isVisible() == true) || (this.executing == true))
+      if((this.colorChooser.isVisible()) || (this.executing))
       {
          return;
       }
@@ -806,7 +806,7 @@ public class InstructionExecuter
                            ((InstructionForward) instruction).setStep(step);
                            this.updateList();
                         }
-                        catch(final Exception exception)
+                        catch(final Exception ignored)
                         {
                         }
                      }
@@ -824,7 +824,7 @@ public class InstructionExecuter
                            ((InstructionRotate) instruction).setAngle(angle);
                            this.updateList();
                         }
-                        catch(final Exception exception)
+                        catch(final Exception ignored)
                         {
                         }
                      }
@@ -898,9 +898,9 @@ public class InstructionExecuter
    {
       final Object information = object2d.getAdditionalInformation();
 
-      if(InstructionExecuter.RECEIVER.equals(information) == true)
+      if(InstructionExecuter.RECEIVER.equals(information))
       {
-         if(rightButton == true)
+         if(rightButton)
          {
             final int index = this.scroll + (y / 64);
 
@@ -947,9 +947,9 @@ public class InstructionExecuter
    @Override
    public void mouseDrag(final Object2D object2d, final int x, final int y, final boolean leftButton, final boolean rightButton)
    {
-      if(InstructionExecuter.RECEIVER.equals(object2d.getAdditionalInformation()) == true)
+      if(InstructionExecuter.RECEIVER.equals(object2d.getAdditionalInformation()))
       {
-         if(leftButton == true)
+         if(leftButton)
          {
             final int dy = (this.mouseListY - y) / 64;
 
@@ -964,7 +964,6 @@ public class InstructionExecuter
             this.mouseListY = y;
          }
 
-         return;
       }
    }
 
@@ -985,10 +984,9 @@ public class InstructionExecuter
    @Override
    public void mouseEnter(final Object2D object2d, final int x, final int y)
    {
-      if(InstructionExecuter.RECEIVER.equals(object2d.getAdditionalInformation()) == true)
+      if(InstructionExecuter.RECEIVER.equals(object2d.getAdditionalInformation()))
       {
          this.mouseListY = y;
-         return;
       }
    }
 
@@ -1009,10 +1007,9 @@ public class InstructionExecuter
    @Override
    public void mouseExit(final Object2D object2d, final int x, final int y)
    {
-      if(InstructionExecuter.RECEIVER.equals(object2d.getAdditionalInformation()) == true)
+      if(InstructionExecuter.RECEIVER.equals(object2d.getAdditionalInformation()))
       {
          this.mouseListY = y;
-         return;
       }
    }
 
@@ -1033,10 +1030,9 @@ public class InstructionExecuter
    @Override
    public void mouseMove(final Object2D object2d, final int x, final int y)
    {
-      if(InstructionExecuter.RECEIVER.equals(object2d.getAdditionalInformation()) == true)
+      if(InstructionExecuter.RECEIVER.equals(object2d.getAdditionalInformation()))
       {
          this.mouseListY = y;
-         return;
       }
    }
 
@@ -1057,7 +1053,7 @@ public class InstructionExecuter
 
       try
       {
-         if((file == null) || (file.exists() == false) || (file.isDirectory() == true))
+         if((file == null) || (!file.exists()) || (file.isDirectory()))
          {
             return;
          }
@@ -1074,8 +1070,9 @@ public class InstructionExecuter
          }
 
          final ObjectJSON json = ObjectJSON.parse(stringBuilder.toString());
+         assert json != null;
          final ArrayJSON arrayJSON = json.get("Instructions").getArray();
-         final int length = arrayJSON.numberOfValue();
+         final int       length    = arrayJSON.numberOfValue();
          this.instructions.clear();
 
          for(int i = 0; i < length; i++)
@@ -1098,7 +1095,7 @@ public class InstructionExecuter
             {
                bufferedReader.close();
             }
-            catch(final Exception exception)
+            catch(final Exception ignored)
             {
             }
          }
@@ -1122,7 +1119,7 @@ public class InstructionExecuter
 
       try
       {
-         if(UtilIO.createFile(file) == false)
+         if(!UtilIO.createFile(file))
          {
             throw new IOException("Failed to create " + file.getAbsolutePath());
          }
@@ -1153,7 +1150,7 @@ public class InstructionExecuter
             {
                bufferedWriter.flush();
             }
-            catch(final Exception exception)
+            catch(final Exception ignored)
             {
             }
 
@@ -1161,7 +1158,7 @@ public class InstructionExecuter
             {
                bufferedWriter.close();
             }
-            catch(final Exception exception)
+            catch(final Exception ignored)
             {
             }
          }

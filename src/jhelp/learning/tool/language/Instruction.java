@@ -48,6 +48,7 @@ public abstract class Instruction
    {
       final InstructionType instructionType = InstructionType.valueOf(json.get(Instruction.TYPE).getString());
       final Instruction instruction = instructionType.createInstructionInstance();
+      assert instruction != null;
       instruction.parse(json);
       instruction.update();
       return instruction;
@@ -184,6 +185,7 @@ public abstract class Instruction
    public final Instruction copy()
    {
       final Instruction instruction = this.instructionType.createInstructionInstance();
+      assert instruction != null;
       instruction.copy(this);
       instruction.update();
       return instruction;

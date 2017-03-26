@@ -123,7 +123,7 @@ public class SpaceShipTurtle
 
          synchronized(this.listeners)
          {
-            if(this.listeners.contains(listener) == false)
+            if(!this.listeners.contains(listener))
             {
                this.listeners.add(listener);
             }

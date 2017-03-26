@@ -72,7 +72,7 @@ public class InstructionRotate
    @Override
    protected String getParameter()
    {
-      if(this.defined == false)
+      if(!this.defined)
       {
          return "{?}";
       }
@@ -97,7 +97,7 @@ public class InstructionRotate
 
       this.defined = value != null;
 
-      if(this.defined == true)
+      if(this.defined)
       {
          this.angle = (int) value.getNumber();
       }
@@ -116,7 +116,7 @@ public class InstructionRotate
    @Override
    protected void serialize(final ObjectJSON json)
    {
-      if(this.defined == true)
+      if(this.defined)
       {
          json.put(InstructionRotate.ANGLE, ValueJSON.newValue(this.angle));
       }

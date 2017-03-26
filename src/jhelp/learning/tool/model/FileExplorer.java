@@ -52,9 +52,9 @@ public class FileExplorer
    class FileArea
    {
       /** File inside area */
-      File      file;
+      final File      file;
       /** Exposed name */
-      String    text;
+      final String    text;
       /** Maximum X value for area bounds */
       final int xMax;
       /** Minimum X value for area bounds */
@@ -136,7 +136,7 @@ public class FileExplorer
       @Override
       public boolean accept(final File file)
       {
-         if((file.isDirectory() == true) || (UtilIO.isVirtualLink(file) == true))
+         if((file.isDirectory()) || (UtilIO.isVirtualLink(file)))
          {
             return false;
          }
@@ -184,7 +184,7 @@ public class FileExplorer
                resourceFile = (ResourceFile) resourceElement;
                file = new File(FileExplorer.DIRECTORY, resourceFile.getName());
 
-               if(file.exists() == false)
+               if(!file.exists())
                {
                   inputStream = resourcesSystem.obtainInputStream(resourceFile);
                   UtilIO.write(inputStream, file);
@@ -260,6 +260,7 @@ public class FileExplorer
       final JHelpImage image = new JHelpImage(width, height, 0xCC0000FF);
       image.startDrawMode();
 
+      //noinspection ConstantConditions
       for(final File file : FileExplorer.DIRECTORY.listFiles(FileExplorer.FILE_FILTER))
       {
          name = file.getName();
@@ -304,7 +305,7 @@ public class FileExplorer
    {
       for(final FileArea fileArea : this.fileAreas)
       {
-         if(fileArea.inside(x, y) == true)
+         if(fileArea.inside(x, y))
          {
             this.fileExplorerListener.openFile(fileArea.file);
             this.setVisible(false);
@@ -444,9 +445,9 @@ public class FileExplorer
 
       final File file = new File(FileExplorer.DIRECTORY, name + FileExplorer.EXTENTION);
 
-      if(file.exists() == true)
+      if(file.exists())
       {
-         if(fileExplorerListener.canOverWrite(file, name) == false)
+         if(!fileExplorerListener.canOverWrite(file, name))
          {
             fileExplorerListener.cancel();
             this.setVisible(false);

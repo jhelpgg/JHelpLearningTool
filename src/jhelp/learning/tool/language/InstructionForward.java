@@ -71,7 +71,7 @@ public class InstructionForward
    @Override
    protected String getParameter()
    {
-      if(this.defined == false)
+      if(!this.defined)
       {
          return "{?}";
       }
@@ -96,7 +96,7 @@ public class InstructionForward
 
       this.defined = value != null;
 
-      if(this.defined == true)
+      if(this.defined)
       {
          this.step = (int) value.getNumber();
       }
@@ -115,7 +115,7 @@ public class InstructionForward
    @Override
    protected void serialize(final ObjectJSON json)
    {
-      if(this.defined == true)
+      if(this.defined)
       {
          json.put(InstructionForward.STEP, ValueJSON.newValue(this.step));
       }

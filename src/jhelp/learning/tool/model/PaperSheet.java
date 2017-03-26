@@ -196,7 +196,7 @@ public class PaperSheet
             {
                this.waiting.wait();
             }
-            catch(final Exception exception)
+            catch(final Exception ignored)
             {
             }
 
@@ -220,7 +220,7 @@ public class PaperSheet
             {
                this.waiting.wait();
             }
-            catch(final Exception exception)
+            catch(final Exception ignored)
             {
             }
 
@@ -306,7 +306,7 @@ public class PaperSheet
    {
       synchronized(this.waiting)
       {
-         if(this.waiting.get() == true)
+         if(this.waiting.get())
          {
             this.waiting.notify();
          }
@@ -329,7 +329,7 @@ public class PaperSheet
 
       synchronized(this.waiting)
       {
-         if(this.waiting.get() == true)
+         if(this.waiting.get())
          {
             this.waiting.notify();
          }
@@ -362,7 +362,7 @@ public class PaperSheet
    {
       if(this.turtle.isDraw() != this.draw)
       {
-         if(this.turtle.isDraw() == true)
+         if(this.turtle.isDraw())
          {
             this.sceneRenderer.playAnimation(this.spaceShipTurtle.getPenDownAnimation());
          }
@@ -374,7 +374,7 @@ public class PaperSheet
 
       this.draw = this.turtle.isDraw();
 
-      if(this.turtle.isVisible() == true)
+      if(this.turtle.isVisible())
       {
          this.spaceShipTurtle.makeVisible();
       }
